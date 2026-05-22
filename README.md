@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agentic Portal
+
+Visual command center for the x402 protocol — manage AI agent spending, monitor streaming revenue, and approve biometric security prompts on Stellar.
+
+## Overview
+
+Two dashboards in one:
+
+**Developer Dashboard** — Real-time metrics for API providers:
+- Streaming fractional-cent revenue chart (30d)
+- Transaction frequency and latency
+- API telemetry logs with status codes and costs
+- Success rates and active agent counts
+
+**Agent Control Room** — Command center for agent owners:
+- On-chain balance tracking per agent
+- Autonomous spending history by category
+- Real-time biometric approval prompts (FaceID/TouchID)
+- Budget increase requests with expiry timers
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4 + Shadcn/ui
+- **Charts:** Recharts
+- **Wallet:** Freighter Browser Extension
+- **Network:** Stellar Testnet
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Connect your Freighter wallet to see wallet state reflected in the header.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | View |
+|---|---|
+| `/dashboard` | Developer dashboard — revenue, tx frequency, telemetry |
+| `/control-room` | Agent owner control room — balances, spending, approval prompts |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── layout.tsx              # Root layout
+│   ├── page.tsx                # Redirects to /dashboard
+│   ├── dashboard/page.tsx      # Developer dashboard
+│   └── control-room/page.tsx   # Agent control room
+├── components/
+│   ├── sidebar.tsx             # Navigation sidebar
+│   ├── wallet-connect.tsx      # Freighter wallet connection
+│   ├── revenue-chart.tsx       # Streaming revenue area chart
+│   ├── tx-frequency.tsx        # Transaction frequency bar chart
+│   ├── telemetry-log.tsx       # API telemetry log table
+│   ├── agent-balance.tsx       # Agent balance cards with progress
+│   └── approval-prompt.tsx     # Biometric approval request cards
+├── lib/
+│   ├── stellar.ts              # Freighter API wrapper
+│   ├── mock-data.ts            # Dashboard sample data
+│   └── utils.ts                # cn() utility
+└── components/ui/              # Shadcn/ui components
+```
